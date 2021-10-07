@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { Container } from "react-bootstrap";
+import PBNavbar from "./components/navbar";
+import Phonebook from "./components/phonebook";
+import axios from 'axios';
+
+const GetPhonebook = () => {
+  let { data } = axios.get('/api/phonebook');
+  return data;
+}
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PBNavbar />
+      <Container>
+        <Phonebook data={GetPhonebook()} />
+      </Container>
     </div>
   );
 }
