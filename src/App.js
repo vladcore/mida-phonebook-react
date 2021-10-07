@@ -5,8 +5,12 @@ import Phonebook from "./components/phonebook";
 import axios from 'axios';
 
 const GetPhonebook = () => {
-  let { data } = axios.get('/api/phonebook');
-  return data || [];
+  try {
+    let { data } = axios.get('/api/phonebook');
+    return JSON.parse(data) || [];
+  } catch (error) {
+    return [];
+  }
 }
 
 function App() {
