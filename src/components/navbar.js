@@ -1,6 +1,6 @@
 import { Navbar, Container } from "react-bootstrap";
 
-function PBNavbar() {
+function PBNavbar({ commandsVisibility, onCommandsVisibilityChange }) {
     return (
         <Navbar bg="light">
             <Container>
