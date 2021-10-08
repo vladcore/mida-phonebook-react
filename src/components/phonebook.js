@@ -17,6 +17,7 @@ const getPhonebooks = async () => {
 }
 
 function RTable({ columns, data }) {
+    console.debug(data);
     const { getTableProps, headerGroups, rows, prepareRow } = useTable({
         columns,
         data
