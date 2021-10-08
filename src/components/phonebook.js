@@ -11,15 +11,14 @@ const getPhonebooks = async () => {
     try {
         let { data } = await axios.get('/api/phonebook');
         console.debug(data);
-        return JSON.parse(data) || [];
+        return data || [];
     } catch (error) {
-        console.debug(error);
+        console.error(error);
         return [];
     }
 }
 
 function RTable({ columns, data }) {
-    console.debug(data);
     const { getTableProps, headerGroups, rows, prepareRow } = useTable({
         columns,
         data
