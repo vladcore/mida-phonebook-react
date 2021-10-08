@@ -10,8 +10,10 @@ import { useAsync } from 'react-async';
 const getPhonebooks = async () => {
     try {
         let { data } = await axios.get('/api/phonebook');
+        console.debug(data);
         return JSON.parse(data) || [];
     } catch (error) {
+        console.debug(data);
         return [];
     }
 }
