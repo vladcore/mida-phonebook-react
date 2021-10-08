@@ -13,7 +13,7 @@ const getPhonebooks = async () => {
         console.debug(data);
         return JSON.parse(data) || [];
     } catch (error) {
-        console.debug(data);
+        console.debug(error);
         return [];
     }
 }
