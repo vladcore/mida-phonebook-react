@@ -26,7 +26,7 @@ function RTable({ columns, data }) {
         useSortBy)
 
     return (
-        <Table striped border {...getTableProps()}>
+        <Table striped {...getTableProps()} className="mt-2">
             <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
