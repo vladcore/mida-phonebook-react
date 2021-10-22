@@ -39,7 +39,7 @@ exports.handler = async (event, context) => {
                 value: '<b>7</b> + [<i>num. interno</i>]'
             },
             {
-                label: 'Cellulari diretti <FontAwesomeIcon icon={faBolt} />',
+                label: 'Cellulari diretti',
                 value: '<b>Speed</b> + [<i>num. interno</i>]'
             }
         ])
