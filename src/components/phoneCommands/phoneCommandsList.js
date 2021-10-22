@@ -1,6 +1,6 @@
 import { Card, ListGroup, Spinner, Alert } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInfoCircle, faBolt } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import PhoneCommandItem from "./phoneCommandItem";
 import axios from 'axios';
 import { useAsync } from 'react-async';
@@ -22,7 +22,7 @@ function PhoneCommands(props) {
     return (
         <div {...props}>
             {dataRequest.isPending &&
-                <div class="text-center">
+                <div className="text-center">
                     <Spinner animation="border" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </Spinner>
@@ -44,7 +44,7 @@ function PhoneCommands(props) {
                     <Card.Body>
                         <ListGroup variant="flush">
                             {dataRequest.data.map((item, i) =>
-                                <PhoneCommandItem
+                                <PhoneCommandItem key={i}
                                     label={item.label}
                                     value={item.value} />
                             )}

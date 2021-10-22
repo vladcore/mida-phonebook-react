@@ -42,7 +42,7 @@ function RTable({ columns, data }) {
                 {rows.map((row, i) => {
                     prepareRow(row);
                     return (
-                        <PhonebookItem
+                        <PhonebookItem key={i}
                             label={row.values.label}
                             email={row.values.email}
                             number={row.values.internalPhoneNumber}
@@ -84,7 +84,7 @@ function Phonebook() {
     return (
         <div>
             {dataRequest.isPending &&
-                <div class="text-center">
+                <div className="text-center">
                     <Spinner animation="border" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </Spinner>

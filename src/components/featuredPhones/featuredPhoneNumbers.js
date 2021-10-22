@@ -20,7 +20,7 @@ function FeaturedPhoneNumbers(props) {
     return (
         <div {...props}>
             {dataRequest.isPending &&
-                <div class="text-center">
+                <div className="text-center">
                     <Spinner animation="border" role="status">
                         <span className="visually-hidden">Loading...</span>
                     </Spinner>
@@ -35,14 +35,15 @@ function FeaturedPhoneNumbers(props) {
             }
             
             {dataRequest.data &&
-                <Row xs="2" lg="4" className="g-2">
-                    <Col>
-                        {dataRequest.data.map((item, i) =>
+                <Row xs="2" lg="4" className="g-3">
+                    {dataRequest.data.map((item, i) =>
+                        <Col key={i}>
                             <FeaturedPhoneItem
                                 label={item.label}
                                 phoneNumber={item.phoneNumber} />
-                        )}
-                    </Col>
+                                
+                        </Col>
+                    )}
                 </Row>
             }
         </div>

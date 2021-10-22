@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import PBNavbar from "./components/navbar";
 import PhoneCommands from "./components/phoneCommands/phoneCommandsList";
 import Phonebook from "./components/phonebook/PhonebookList";
