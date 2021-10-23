@@ -1,11 +1,12 @@
 import React from 'react';
-import { Table, Spinner, Alert } from 'react-bootstrap';
+import { Table, Spinner, Alert, InputGroup, FormControl } from 'react-bootstrap';
 import PhonebookItem from './phonebookItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBolt, faAt, faUser, faPhone, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBolt, faAt, faUser, faPhone, faMobileAlt, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useTable, useSortBy } from 'react-table';
 import axios from 'axios';
 import { useAsync } from 'react-async';
+import { useState } from "react";
 
 const getPhonebooks = async () => {
     try {
@@ -26,7 +27,7 @@ function RTable({ columns, data }) {
         useSortBy)
 
     return (
-        <Table striped {...getTableProps()} className="mt-2">
+        <Table striped {...getTableProps()}>
             <thead>
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -79,7 +80,30 @@ function Phonebook() {
             accessor: 'mobilePhoneNumber'
         }
     ];
-    const dataRequest = useAsync({ promiseFn: getPhonebooks });
+
+    const [phonebookData, setPhonebookData] = useState([]);
+    const [filteredPhonebookData, setFilteredPhonebookData] = useState([]);
+    const dataRequest = useAsync({
+        promiseFn: getPhonebooks,
+        onResolve: (data) => {
+            setPhonebookData(data);
+            setFilteredPhonebookData(data);
+        }});
+
+    const searchValueChanged = (event) => {
+        let filterValue = event.target.value.toLowerCase();
+        if (filterValue === ''){
+            setFilteredPhonebookData(phonebookData);
+            return;
+        }
+        
+        setFilteredPhonebookData(phonebookData.filter(item => (
+            (item.label != null && item.label.toLowerCase().includes(filterValue)) ||
+            (item.email != null && item.email.toLowerCase().includes(filterValue)) ||
+            (item.internalPhoneNumber != null && item.internalPhoneNumber.toLowerCase().includes(filterValue)) ||
+            (item.mobilePhoneNumber != null && item.mobilePhoneNumber.toLowerCase().includes(filterValue))
+        )));
+    };
 
     return (
         <div>
@@ -99,7 +123,13 @@ function Phonebook() {
             }
             
             {dataRequest.data &&
-                <RTable columns={columns} data={dataRequest.data} />
+                <div>
+                    <InputGroup size="sm" className="mt-3">
+                        <InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
+                        <FormControl type="search" placeholder="cerca" onChange={searchValueChanged} />
+                    </InputGroup>
+                    <RTable columns={columns} data={filteredPhonebookData} className="mt-3" />
+                </div>
             }
         </div>
     );

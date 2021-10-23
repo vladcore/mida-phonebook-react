@@ -7,8 +7,8 @@ function PhonebookItem ({ label, email, number, mobile, speed }) {
             <td>{speed ? <FontAwesomeIcon icon={faBolt} /> : ''}</td>
             <td>{number}</td>
             <td>{label}</td>
-            <td>{email}</td>
-            <td>{mobile}</td>
+            <td><a href={'mailto:' + email}>{email}</a></td>
+            <td><a href={'tel:' + mobile}>{mobile}</a></td>
         </tr>
     );
 }
